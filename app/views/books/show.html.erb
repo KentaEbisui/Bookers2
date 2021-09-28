@@ -1,0 +1,47 @@
+<% if @book.errors.any? %>
+  <%= @book.errors.count %>件のエラーが発生しました
+  <% @book.errors.full_messages.each do |message| %>
+    <%= message %>
+  <% end %>
+<% end %>
+
+<div class="container">
+<div class="row">
+  <div class="col-md-3">
+    <%= render 'users/usertemplete', user: @user %>
+    <%= render 'books/booktemplete', book: @newbook %>
+  </div>
+
+  <div class="col-md-8 offset-md-1">
+    <h2>Book detail</h2>
+    <table class="table">
+
+ <tr>
+ <td>
+ <%= link_to user_path(@user) do %>
+ <%= attachment_image_tag @user, :profile_image, :fill, 40, 40, format: 'jpeg', fallback: "no_image.jpg" %><br>
+ <% end %>
+
+ <%= link_to @user.name,user_path(@user.id) %>
+  </td>
+
+  <td><%= link_to @book.title,book_path(@book.id) %></td>
+
+  <td><%= @book.body %></td>
+
+  <% if @book.user_id == current_user.id %>
+
+  <td><%= link_to "Edit",edit_book_path(@book),class:"btn btn-sm btn-success edit_book_21076" %></td>
+
+  <td><%= link_to "Destroy", book_path(@book),class:"btn btn-sm btn-danger destroy_book_21076", method: :delete, "data-confirm" => "本当に削除しますか？" %></td>
+
+
+  <% end %>
+
+
+
+ </tr>
+ </table>
+</div>
+</div>
+</div>
